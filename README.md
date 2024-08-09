@@ -90,6 +90,17 @@ python model_predict.py
 
 Le fichier de prédiction se sauvegarde automatiquement sous format .csv dans le dossier data.   
 
+## AMÉLIORATIONS POSSIBLES
+
+Il existe différentes pistes d'améliorations :
+- Approfondir le nettoyage des données textuelles.
+- Utiliser d'autres modèles d'extraction de features (fasttext, BERT, USE).
+- Essayer des visualisations en faible dimensions (t-SNE) en affichant la typologie NPS ou la note.
+- Régler les hyperparamètres du modèle.
+- Utiliser le ARI score en plus de l'accuracy.
+- Enregistrer les runs grâce à mlflow et faire du model serving (dagshub, mlflow).
+- Créer une api de prédiction et un dashboard permettant de requêter cette api pour visualiser les prédictions et afficher les textes et les notes réelles.
+
 ## PROJET GIT
 
 https://github.com/zerippeur/test-technique-guest-suite
