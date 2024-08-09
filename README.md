@@ -53,7 +53,7 @@ cd test-technique-guest-suite
 ```
 - Pour Windows :
 ```bash
-install.bat
+./install.bat
 ```
 
 #### Exécution.   
