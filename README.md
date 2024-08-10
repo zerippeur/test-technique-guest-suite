@@ -96,7 +96,7 @@ Il existe différentes pistes d'améliorations :
 - Approfondir le nettoyage des données textuelles.
 - Utiliser d'autres modèles d'extraction de features (fasttext, BERT, USE).
 - Essayer des visualisations en faible dimensions (t-SNE) en affichant la typologie NPS ou la note.
-- Régler les hyperparamètres du modèle.
+- Optimiser les hyperparamètres du modèle et utiliser un score customisé (minimiser les erreurs de classification entre les catégories les plus extrêmes du NPS par exemple).
 - Utiliser le ARI score en plus de l'accuracy.
 - Enregistrer les runs grâce à mlflow et faire du model serving (dagshub, mlflow).
 - Créer une api de prédiction et un dashboard permettant de requêter cette api pour visualiser les prédictions et afficher les textes et les notes réelles.
