@@ -94,7 +94,7 @@ Le fichier de prédiction se sauvegarde automatiquement sous format .csv dans le
 
 Il existe différentes pistes d'améliorations :
 - Approfondir le nettoyage des données textuelles.
-- Utiliser d'autres modèles d'extraction de features (fasttext, BERT, USE).
+- Utiliser d'autres modèles d'extraction de features (fasttext, BERT, USE) ou réseau de neurones (GRU, LSTM).
 - Essayer des visualisations en faible dimensions (t-SNE) en affichant la typologie NPS ou la note.
 - Optimiser les hyperparamètres du modèle et utiliser un score customisé (minimiser les erreurs de classification entre les catégories les plus extrêmes du NPS par exemple).
 - Utiliser le ARI score en plus de l'accuracy.
