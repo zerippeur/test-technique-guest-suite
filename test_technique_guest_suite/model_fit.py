@@ -226,14 +226,16 @@ def main() -> None:
         balancer = RandomOverSampler(random_state=42)
 
         X_train_df = X_train.to_frame()
+        X_val_df = X_val.to_frame()
         # Fit and transform the dataset
         X_train_resampled, y_train_resampled = balancer.fit_resample(X_train_df, y_train)
-        X_val_resampled, y_val_resampled = balancer.fit_resample(X_val.to_frame(), y_val)
+        X_val_resampled, y_val_resampled = balancer.fit_resample(X_val_df, y_val)
 
         print("Original target shape:", Counter(y_train))
         print("Resampled target shape:", Counter(y_train_resampled))
 
         X_train_resampled = X_train_resampled["review_text"]
+        X_val_resampled = X_val_resampled["review_text"]
 
     # Train and evaluate model
     with timer("training and evaluating model"):
