@@ -40,7 +40,7 @@ def load_data(
     """
 
     # Load data
-    with gzip.open("../data/test_no_nan.pkl.gz", "rb") as f:
+    with gzip.open("./data/test_no_nan.pkl.gz", "rb") as f:
         test_df = pickle.load(f)
         
     return test_df
