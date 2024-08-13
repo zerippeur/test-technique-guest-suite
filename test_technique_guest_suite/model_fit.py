@@ -221,4 +221,5 @@ def main() -> None:
     with timer("training and evaluating model"):
         train_and_evaluate_model(X_train, X_val, y_train, y_val)
     
-main()
+if __name__ == "__main__":
+  main()

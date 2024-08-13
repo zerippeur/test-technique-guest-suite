@@ -130,4 +130,5 @@ def main() -> None:
     with timer("saving predictions"):
         test_df.to_csv("../data/predictions.csv", index=False)
     
-main()
+if __name__ == "__main__":
+  main()
