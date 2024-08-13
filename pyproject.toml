@@ -12,6 +12,7 @@ plotly = "^5.23.0"
 nltk = "^3.8.1"
 scikit-learn = "^1.5.1"
 kaleido = "0.1.0post1"
+imbalanced-learn = "^0.12.3"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^0.982"

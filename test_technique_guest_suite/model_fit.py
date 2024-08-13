@@ -6,6 +6,9 @@ import pickle
 import gzip
 import pandas as pd
 import plotly.graph_objects as go
+from imblearn.under_sampling import RandomUnderSampler
+from imblearn.over_sampling import RandomOverSampler
+from collections import Counter
 from sklearn.model_selection import cross_validate
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -46,16 +49,17 @@ def load_data(
     """
 
     # Load data
-    with gzip.open("../data/train_no_nan.pkl.gz", "rb") as f:
+    with gzip.open("./data/train_no_nan.pkl.gz", "rb") as f:
         train_df = pickle.load(f)
 
-    with gzip.open("../data/val_no_nan.pkl.gz", "rb") as f:
+    with gzip.open("./data/val_no_nan.pkl.gz", "rb") as f:
         val_df = pickle.load(f)
         
     X_train = train_df["review_text"]
     X_val= val_df["review_text"]
     y_train = train_df["global_rate"]
     y_val = val_df["global_rate"]
+
     return X_train, X_val, y_train, y_val
 
 def create_stopwords_set() -> set:
@@ -63,7 +67,7 @@ def create_stopwords_set() -> set:
     Create stopwords set
     Function to create a set of stopwords for all supported languages.
     """
-    nltk.download('stopwords')
+    nltk.download('stopwords', download_dir='./data')
     # Create a combined list of stopwords for all supported languages
     all_stopwords = set()
     for language in stopwords.fileids():
@@ -161,7 +165,7 @@ def train_and_evaluate_model(
 
         # Columns to format
         columns_to_format = ['precision', 'recall', 'f1-score']
-        report_df[columns_to_format] = report_df[columns_to_format].applymap(
+        report_df[columns_to_format] = report_df[columns_to_format].map(
             lambda x: f"{x:.2f}" if isinstance(x, float) else x
         )
 
@@ -217,9 +221,23 @@ def main() -> None:
         y_train = y_train.apply(categorize_nps)
         y_val = y_val.apply(categorize_nps)
 
+    with timer("balancing dataset"):
+        # Create an instance of SMOTE
+        balancer = RandomOverSampler(random_state=42)
+
+        X_train_df = X_train.to_frame()
+        # Fit and transform the dataset
+        X_train_resampled, y_train_resampled = balancer.fit_resample(X_train_df, y_train)
+        X_val_resampled, y_val_resampled = balancer.fit_resample(X_val.to_frame(), y_val)
+
+        print("Original target shape:", Counter(y_train))
+        print("Resampled target shape:", Counter(y_train_resampled))
+
+        X_train_resampled = X_train_resampled["review_text"]
+
     # Train and evaluate model
     with timer("training and evaluating model"):
-        train_and_evaluate_model(X_train, X_val, y_train, y_val)
+        train_and_evaluate_model(X_train_resampled, X_val_resampled, y_train_resampled, y_val_resampled)
     
 if __name__ == "__main__":
   main()

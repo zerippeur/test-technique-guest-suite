@@ -59,7 +59,7 @@ def create_stopwords_set() -> set:
     Create stopwords set
     Function to create a set of stopwords for all supported languages.
     """
-    nltk.download('stopwords')
+    nltk.download('stopwords', download_dir='./data')
     # Create a combined list of stopwords for all supported languages
     all_stopwords = set()
     for language in stopwords.fileids():
@@ -128,7 +128,7 @@ def main() -> None:
 
     # Save predictions
     with timer("saving predictions"):
-        test_df.to_csv("../data/predictions.csv", index=False)
+        test_df.to_csv("./data/predictions.csv", index=False)
     
 if __name__ == "__main__":
   main()

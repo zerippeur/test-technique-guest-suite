@@ -69,23 +69,14 @@ venv\Scripts\activate
 
 2. Lancer l'entraînement du modèle.   
 
-Se placer dans le répertoire test_technique_guest_suite.   
 ```bash
-cd test_technique_guest_suite
-```
-Puis lancer le script d'entraînement :   
-```bash
-python model_fit.py
+python ./test_technique_guest_suite/model_fit.py
 ```
 
 3. Lancer la prédiction du modèle.   
-Se placer dans le répertoire test_technique_guest_suite.   
+ 
 ```bash
-cd test_technique_guest_suite
-```
-Puis lancer le script de prédiction :   
-```bash
-python model_predict.py
+python ./test_technique_guest_suite/model_predict.py
 ```
 
 Le fichier de prédiction se sauvegarde automatiquement sous format .csv dans le dossier data.   
